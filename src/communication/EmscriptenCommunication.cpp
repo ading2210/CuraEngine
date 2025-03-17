@@ -46,12 +46,16 @@ EmscriptenCommunication::EmscriptenCommunication(const std::vector<std::string>&
 
 void EmscriptenCommunication::sendGCodePrefix(const std::string& prefix) const
 {
-    emscripten_run_script(fmt::format("globalThis[\"{}\"](\"{}\")", gcode_header_handler_, convertTobase64(prefix)).c_str());
+    EM_ASM({
+        globalThis[UTF8ToString($0)](UTF8ToString($1))
+    }, gcode_header_handler_.c_str(), prefix.c_str());
 }
 
 void EmscriptenCommunication::sendProgress(double progress) const
 {
-    emscripten_run_script(fmt::format("globalThis[\"{}\"]({})", progress_handler_, progress).c_str());
+    EM_ASM({
+        globalThis[UTF8ToString($0)]($1)
+    }, progress_handler_.c_str(), progress);
 }
 
 std::string EmscriptenCommunication::createSliceInfoMessage()
@@ -140,13 +144,17 @@ std::string EmscriptenCommunication::createEngineInfoMessage()
 void EmscriptenCommunication::beginGCode()
 {
     auto engine_info = createEngineInfoMessage();
-    emscripten_run_script(fmt::format("globalThis[\"{}\"]({})", engine_info_handler_, engine_info).c_str());
+     EM_ASM({
+        globalThis[UTF8ToString($0)](JSON.parse(UTF8ToString($1)))
+    }, engine_info_handler_.c_str(), engine_info.c_str());
 }
 void EmscriptenCommunication::sliceNext()
 {
     CommandLine::sliceNext();
     auto slice_info = createSliceInfoMessage();
-    emscripten_run_script(fmt::format("globalThis[\"{}\"]({})", slice_info_handler_, slice_info).c_str());
+    EM_ASM({
+        globalThis[UTF8ToString($0)](JSON.parse(UTF8ToString($1)))
+    }, slice_info_handler_.c_str(), slice_info.c_str());
 };
 
 } // namespace cura
