@@ -1,0 +1,27 @@
+{
+  "name": "@mosaicslicer/curaengine",
+  "version": "0.0.1",
+  "description": "Powerful, fast and robust engine for converting 3D models into g-code instructions for 3D printers. (unofficial)",
+  "main": "dist/CuraEngine.js",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MosaicSlicer/CuraEngine.git"
+  },
+  "keywords": [
+    "cura",
+    "curaengine",
+    "fdm",
+    "3d-printing",
+    "slicer"
+  ],
+  "author": "",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/MosaicSlicer/CuraEngine/issues"
+  },
+  "homepage": "https://github.com/MosaicSlicer/CuraEngine#readme"
+}
