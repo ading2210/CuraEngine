@@ -1,7 +1,8 @@
 {
   "name": "@mosaicslicer/curaengine",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Powerful, fast and robust engine for converting 3D models into g-code instructions for 3D printers. (unofficial)",
+  "type": "module",
   "main": "dist/CuraEngine.js",
   "repository": {
     "type": "git",
